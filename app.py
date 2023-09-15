@@ -258,7 +258,6 @@ def comic(_id):
 
 
 @app.route('/search/<keyword>')
-@login_required
 def search(keyword):
     if not keyword:
         return render_template('index.html')
