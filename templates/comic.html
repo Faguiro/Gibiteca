@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block title %}Quadrinhos{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Detalhes da HQ</h1>
+    <div class="comic-details">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ comic.capa }}" alt="{{ comic.titulo }}">
+            </div>
+            <div class="col-md-6">
+                <h2>{{ comic.titulo }}</h2>
+                <p>Editora: {{ comic.editora }}</p>
+                <p>Descrição: {{ comic.descricao }}</p>
+                <p>Links para download:</p>
+                <div class="row">
+                
+                    {% for link_info in comic.links_adicionais %}
+                    {% set parts = link_info.split(': ') %}
+                    <div class="col">
+                        <a id="link" href="{{ parts[1] }}" class="btn btn-primary" target="_blank">{{ parts[0]
+                            }}</a><br>
+                    </div>
+                    {% endfor %}
+                    <!-- se o  usuario esta logado -->
+                </div>
+                <!-- Botão de Login -->
+               
+
+                <!-- Modal de Login -->
+                
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $(`#prev-page`).click(function () {
+            window.location.href = `/comic/{{ comic.id - 1 }}`;
+        });
+        $(`#next-page`).click(function () {
+            window.location.href = `/comic/{{ comic.id + 1 }}`;
+        });
+    });
+
+
+    $(document).ready(function () {
+        // Adicione um evento de clique ao botão de login no menu de navegação
+        $('#login-button').click(function () {
+            // Abra o modal de login
+            $('#login-modal').modal('show');
+        });
+
+        // Manipule o envio do formulário de login via AJAX
+        $('#login-form').submit(function (event) {
+            event.preventDefault();
+
+            // Obtenha os dados do formulário
+            const formData = {
+                username: $('#username').val(),
+                email: $('#email').val(),
+                password: $('#password').val()
+            };
+
+            // Envie os dados para a API de login
+            $.ajax({
+                type: 'POST',
+                url: '/api/login',
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        // Redirecione o usuário após o login bem-sucedido
+                        alert('logado!')
+                    } else {
+                        // Exiba uma mensagem de erro
+                        $('#login-error').text('Credenciais inválidas');
+                    }
+                },
+                error: function () {
+                    // Trate erros de solicitação
+                    $('#login-error').text('Erro ao processar a solicitação de login');
+                }
+            });
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const loginButton = document.getElementById('login-button');
+        const loginModal = document.getElementById('login-modal');
+        const closeModal = document.getElementById('close-modal');
+
+        // Abrir o modal quando o botão de login for clicado
+        loginButton.addEventListener('click', function () {
+            loginModal.style.display = 'block';
+        });
+
+        // Fechar o modal quando o botão de fechar for clicado
+        closeModal.addEventListener('click', function () {
+            loginModal.style.display = 'none';
+        });
+
+        // Fechar o modal se o usuário clicar fora dele
+        window.addEventListener('click', function (event) {
+            if (event.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+    });
+
+
+</script>
+{% endblock %}

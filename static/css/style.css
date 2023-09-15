@@ -1,0 +1,105 @@
+.container{
+    cursor: default;
+}
+.user_menu {
+    position: absolute;
+    top: 50px;
+    padding: 10px;
+    right: 10px;
+    background-color: beige;
+    display: grid;
+}
+.header {
+    width: 100%;
+    height: 30vh;
+    position: relative;
+}
+
+.bg_vid {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+ul.sugestoes {
+    position: absolute;
+    top: 3rem;
+    background-color: #f8f8f1;
+    z-index: 10;
+    list-style: none;
+    max-height: 173px;
+    width: 204px;
+    padding: 13px;
+    overflow-y: auto;
+}
+
+div#user {
+    color: rgb(0, 0, 0);
+}
+
+div#navbarTogglerDemo01 {
+    justify-content: space-between;
+}
+
+ul.navbar-nav {
+    justify-content: space-evenly;
+    width: 50%;
+}
+
+/* Estilo para o modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 60%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+/* Botão para fechar o modal */
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+ul.nav {
+    justify-content: center;
+    background-color: #07071d;
+}
+
+p.card-text {
+    height: 120px;
+    overflow: hidden;
+}
+
+a#link {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ul.nav {
+    justify-content: center;
+    background-color: #07071d;
+}
+
+p.card-text {
+    height: 120px;
+    overflow: hidden;
+}

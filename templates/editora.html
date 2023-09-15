@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Quadrinhos{% endblock %}
+{% block content %}
+
+
+<div class="container">
+    <h1>{{ editora }}</h1>
+
+    <div class="row" id="comics-container"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-primary" id="prev-page">Anterior</button>
+            <button class="btn btn-primary" id="next-page">Próxima</button>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let page = 1;
+        const editora = "{{ editora }}"; // Preencha com o nome da editora desejada
+
+        function loadComics() {
+            $.get(`{{ url_for('editora_comics', editora=editora) }}?page=${page}`, function (data) {
+                const comicsContainer = $('#comics-container');
+                comicsContainer.empty();
+                console.log(data);
+
+                data.forEach(function (comic) {
+                    const comicCard = `
+                    <div class="col-md-3">
+                        <div class="card">
+                            <img src="${comic.capa}" class="card-img-top" alt="${comic.titulo}">
+                            <div class="card-body">
+                                <h5 class="card-title">${comic.titulo}</h5> 
+                                <p class="card-info" id=${comic.id} >${comic.editora} | ${comic.id}</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                    comicsContainer.append(comicCard);
+                });
+            });
+
+
+        }
+
+        loadComics();
+
+        $('#next-page').click(function () {
+            page++;
+            loadComics();
+        });
+
+        $('#prev-page').click(function () {
+            if (page > 1) {
+                page--;
+                loadComics();
+            }
+        });
+
+        $('.card-info').click(function () {
+            let id = $('.card-info').attr('id');
+            console.log(id);
+            //window.location.href = `/product/${id}`;
+        });
+    });
+
+</script>
+{% endblock %}

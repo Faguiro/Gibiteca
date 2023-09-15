@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Quadrinhos{% endblock %}
+
+
+{% block content %}
+
+    <div class="container">
+        <h1>Resultados da Pesquisa</h1>
+        <p>Resultados para: {{ keyword }}</p>
+        <p>Página:
+            <span id="current-page">1</span>
+            de
+            <span id="total-pages">1</span>
+        </p>
+        <p>Total de resultados: <span id="total-results">0</span></p>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary prev-search">Anterior</button>
+                <button class="btn btn-primary next-search">Próxima</button>
+            </div>
+        </div>
+        <div class="row" id="comics-container"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary prev-search" command="">Anterior</button>
+                <button class="btn btn-primary next-search">Próxima</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            let key = "{{ keyword }}";
+            let page = 1;
+            loadSearchInfo(key, page);
+            search_control(key, page);
+            searchComics(key, page);            
+        });
+
+    </script>
+
+{% endblock %}

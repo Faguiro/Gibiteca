@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Quadrinhos{% endblock %}
+
+{% block content %}
+
+<!-- Conteúdo específico desta página aqui -->
+<div class="container">
+    <h1>Quadrinhos</h1>
+    <p>Página:
+        <span id="current-page">1</span>
+        de
+        <span id="total-pages">1</span>
+    </p>
+    <p>Total de resultados: <span id="total-results">0</span></p>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-primary" id="prev-page">Anterior</button>
+            <button class="btn btn-primary" id="next-page">Próxima</button>
+        </div>
+    </div>
+    <div class="row" id="comics-container"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-primary" id="prev-page">Anterior</button>
+            <button class="btn btn-primary" id="next-page">Próxima</button>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        let page = 1;
+        loadAllInfo(page);
+        loadComics(page);
+
+
+        $('#next-page').click(function () {
+            page++;
+            loadComics(page);
+            loadAllInfo(page);
+        });
+
+        $('#prev-page').click(function () {
+            if (page > 1) {
+                page--;
+                loadComics(page);
+                loadAllInfo(page);
+            }
+        });
+
+
+        $('.card-info').click(function () {
+            let id = $('.card-info').attr('id');
+            console.log(id);
+            //window.location.href = `/product/${id}`;
+        });
+
+
+
+    });
+
+</script>
+
+{% endblock %}
